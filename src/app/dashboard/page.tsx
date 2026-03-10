@@ -13,36 +13,52 @@ export default function Dashboard() {
 
  const menuOptions = [
   {
-   id: 'pactos',
-   title: 'Pactos e Acordos',
-   description: 'Criar e gerenciar pactos entre setores',
-   icon: '🤝',
+   id: 'chamados',
+   title: 'Chamados de Serviço',
+   description: 'Abrir e gerenciar chamados entre setores',
+   icon: (
+    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+    </svg>
+   ),
    color: 'bg-blue-500 hover:bg-blue-600',
-   route: '/pactuacao/pactos'
+   route: '/chamados'
   },
   {
-   id: 'metas',
-   title: 'Metas e Indicadores',
-   description: 'Acompanhar metas e KPIs dos pactos',
-   icon: '📊',
+   id: 'atividades',
+   title: 'Atividades',
+   description: 'Acompanhar atividades dos chamados',
+   icon: (
+    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+   ),
    color: 'bg-green-500 hover:bg-green-600',
-   route: '/pactuacao/metas'
+   route: '/chamados/atividades'
   },
   {
    id: 'setores',
    title: 'Setores',
-   description: 'Gerenciar setores e departamentos',
-   icon: '🏢',
+   description: 'Gerenciar setores e equipes',
+   icon: (
+    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>
+   ),
    color: 'bg-purple-500 hover:bg-purple-600',
-   route: '/pactuacao/setores'
+   route: '/chamados/setores'
   },
   {
-   id: 'dashboard-indicadores',
-   title: 'Dashboard de Indicadores',
-   description: 'Visualizar desempenho geral',
-   icon: '📈',
+   id: 'dashboard',
+   title: 'Dashboard',
+   description: 'Visualizar desempenho geral dos chamados',
+   icon: (
+    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+    </svg>
+   ),
    color: 'bg-orange-500 hover:bg-orange-600',
-   route: '/pactuacao/dashboard'
+   route: '/chamados/dashboard'
   }
  ];
 
@@ -54,7 +70,7 @@ export default function Dashboard() {
      <div className="flex justify-between items-center h-16">
       <div className="flex items-center">
        <h1 className="text-2xl font-bold text-gray-900">
-        Sistema de Pactuação
+        Sistema de Chamados
        </h1>
       </div>
       
@@ -122,7 +138,7 @@ export default function Dashboard() {
          className="w-full p-6 text-left focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-inset"
         >
          <div className="flex items-center mb-4">
-          <div className={`${option.color} text-white p-3 rounded-lg mr-4 text-2xl`}>
+          <div className={`${option.color} text-white p-3 rounded-lg mr-4`}>
            {option.icon}
           </div>
           <h3 className="text-xl font-semibold text-gray-900 ">
@@ -147,7 +163,7 @@ export default function Dashboard() {
      <div className="mt-12 lg:hidden">
       <div className="bg-blue-50 rounded-lg p-6">
        <h3 className="text-lg font-medium text-blue-900 mb-2">
-        💡 Dica
+        Dica
        </h3>
        <p className="text-blue-800 text-sm">
         Esta aplicação é otimizada para uso em dispositivos móveis. Toque nas opções acima para navegar pelo sistema.
@@ -161,7 +177,7 @@ export default function Dashboard() {
    <footer className="bg-white border-t border-gray-200 mt-12">
     <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
      <p className="text-center text-gray-500 text-sm">
-      © 2024 Sistema de Pactuação Interna - Gestão de Acordos entre Setores
+      © 2024 Sistema de Chamados - Gestão de Chamados de Serviço
      </p>
     </div>
    </footer>

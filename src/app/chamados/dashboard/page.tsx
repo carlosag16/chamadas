@@ -5,57 +5,57 @@ import { useState } from 'react';
 
 interface SetorPerformance {
   setor: string;
-  pactosAtivos: number;
-  metasConcluidas: number;
-  metasTotais: number;
+  chamadosAtivos: number;
+  atividadesConcluidas: number;
+  atividadesTotais: number;
   progressoMedio: number;
 }
 
-export default function DashboardIndicadoresPage() {
+export default function DashboardChamadosPage() {
   const router = useRouter();
   const [periodoSelecionado, setPeriodoSelecionado] = useState<'mes' | 'trimestre' | 'ano'>('mes');
 
-  // Mock data para o dashboard
   const estatisticasGerais = {
-    totalPactos: 5,
-    pactosAtivos: 3,
-    pactosFinalizados: 1,
-    pactosEmRevisao: 1,
-    totalMetas: 10,
-    metasConcluidas: 2,
-    metasNoPrazo: 4,
-    metasAtrasadas: 1,
-    metasAtencao: 3,
+    totalChamados: 5,
+    chamadosAbertos: 0,
+    chamadosEmAndamento: 3,
+    chamadosAguardando: 1,
+    chamadosResolvidos: 1,
+    totalAtividades: 10,
+    atividadesConcluidas: 2,
+    atividadesEmAndamento: 3,
+    atividadesAtrasadas: 1,
+    atividadesPendentes: 4,
     progressoGeral: 56
   };
 
   const performancePorSetor: SetorPerformance[] = [
     {
       setor: 'Qualidade',
-      pactosAtivos: 1,
-      metasConcluidas: 0,
-      metasTotais: 3,
+      chamadosAtivos: 1,
+      atividadesConcluidas: 0,
+      atividadesTotais: 3,
       progressoMedio: 42
     },
     {
       setor: 'Operações',
-      pactosAtivos: 1,
-      metasConcluidas: 0,
-      metasTotais: 2,
+      chamadosAtivos: 1,
+      atividadesConcluidas: 0,
+      atividadesTotais: 2,
       progressoMedio: 28
     },
     {
       setor: 'RH',
-      pactosAtivos: 1,
-      metasConcluidas: 0,
-      metasTotais: 3,
+      chamadosAtivos: 1,
+      atividadesConcluidas: 0,
+      atividadesTotais: 3,
       progressoMedio: 51
     },
     {
       setor: 'Facilities',
-      pactosAtivos: 0,
-      metasConcluidas: 2,
-      metasTotais: 2,
+      chamadosAtivos: 0,
+      atividadesConcluidas: 2,
+      atividadesTotais: 2,
       progressoMedio: 100
     }
   ];
@@ -63,8 +63,8 @@ export default function DashboardIndicadoresPage() {
   const ultimasAtualizacoes = [
     {
       id: 1,
-      pacto: 'Pacto de Implementação de Sistema de Qualidade',
-      meta: 'Documentos mapeados',
+      chamado: 'Implantação do Sistema de Gestão da Qualidade',
+      atividade: 'Mapear documentos',
       valorAnterior: 40,
       valorNovo: 45,
       unidade: '%',
@@ -73,8 +73,8 @@ export default function DashboardIndicadoresPage() {
     },
     {
       id: 2,
-      pacto: 'Pacto de Treinamento e Desenvolvimento',
-      meta: 'Colaboradores treinados',
+      chamado: 'Programa de Treinamento e Desenvolvimento',
+      atividade: 'Treinar colaboradores',
       valorAnterior: 130,
       valorNovo: 145,
       unidade: 'pessoas',
@@ -83,8 +83,8 @@ export default function DashboardIndicadoresPage() {
     },
     {
       id: 3,
-      pacto: 'Pacto de Redução de Custos Operacionais',
-      meta: 'Processos otimizados',
+      chamado: 'Redução de Custos Operacionais',
+      atividade: 'Otimizar processos',
       valorAnterior: 10,
       valorNovo: 12,
       unidade: 'qtd',
@@ -97,25 +97,25 @@ export default function DashboardIndicadoresPage() {
     {
       id: 1,
       tipo: 'prazo',
-      titulo: 'Meta próxima do prazo',
-      descricao: 'Documentos mapeados - Prazo em 7 dias',
-      pacto: 'Pacto de Implementação de Sistema de Qualidade',
+      titulo: 'Atividade próxima do prazo',
+      descricao: 'Mapear documentos - Prazo em 7 dias',
+      chamado: 'Implantação do Sistema de Gestão da Qualidade',
       severidade: 'alta'
     },
     {
       id: 2,
       tipo: 'atrasado',
-      titulo: 'Meta atrasada',
-      descricao: 'Redução de custos - Progresso abaixo do esperado',
-      pacto: 'Pacto de Redução de Custos Operacionais',
+      titulo: 'Atividade atrasada',
+      descricao: 'Reduzir custos - Progresso abaixo do esperado',
+      chamado: 'Redução de Custos Operacionais',
       severidade: 'alta'
     },
     {
       id: 3,
       tipo: 'atencao',
       titulo: 'Atenção necessária',
-      descricao: 'Horas de treinamento - Progresso lento',
-      pacto: 'Pacto de Treinamento e Desenvolvimento',
+      descricao: 'Cumprir horas de treinamento - Progresso lento',
+      chamado: 'Programa de Treinamento e Desenvolvimento',
       severidade: 'media'
     }
   ];
@@ -135,39 +135,22 @@ export default function DashboardIndicadoresPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
               </button>
-              <h1 className="text-2xl font-bold text-gray-900">Dashboard de Indicadores</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
             </div>
             <div className="flex gap-2">
-              <button
-                onClick={() => setPeriodoSelecionado('mes')}
-                className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-                  periodoSelecionado === 'mes'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                }`}
-              >
-                Mês
-              </button>
-              <button
-                onClick={() => setPeriodoSelecionado('trimestre')}
-                className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-                  periodoSelecionado === 'trimestre'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                }`}
-              >
-                Trimestre
-              </button>
-              <button
-                onClick={() => setPeriodoSelecionado('ano')}
-                className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-                  periodoSelecionado === 'ano'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-                }`}
-              >
-                Ano
-              </button>
+              {(['mes', 'trimestre', 'ano'] as const).map((periodo) => (
+                <button
+                  key={periodo}
+                  onClick={() => setPeriodoSelecionado(periodo)}
+                  className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                    periodoSelecionado === periodo
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {periodo.charAt(0).toUpperCase() + periodo.slice(1)}
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -176,25 +159,25 @@ export default function DashboardIndicadoresPage() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 sm:px-0 space-y-6">
-          {/* Visão Geral - Cards Principais */}
+          {/* Cards Principais */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg shadow-lg p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-blue-100 text-sm">Pactos Ativos</p>
-                  <p className="text-3xl font-bold mt-1">{estatisticasGerais.pactosAtivos}</p>
-                  <p className="text-blue-100 text-xs mt-1">de {estatisticasGerais.totalPactos} totais</p>
+                  <p className="text-blue-100 text-sm">Chamados Ativos</p>
+                  <p className="text-3xl font-bold mt-1">{estatisticasGerais.chamadosEmAndamento + estatisticasGerais.chamadosAguardando}</p>
+                  <p className="text-blue-100 text-xs mt-1">de {estatisticasGerais.totalChamados} totais</p>
                 </div>
-                <div className="text-5xl opacity-20">🤝</div>
+                <div className="text-5xl opacity-20">🎫</div>
               </div>
             </div>
 
             <div className="bg-gradient-to-br from-green-500 to-green-600 text-white rounded-lg shadow-lg p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-green-100 text-sm">Metas Concluídas</p>
-                  <p className="text-3xl font-bold mt-1">{estatisticasGerais.metasConcluidas}</p>
-                  <p className="text-green-100 text-xs mt-1">de {estatisticasGerais.totalMetas} totais</p>
+                  <p className="text-green-100 text-sm">Atividades Concluídas</p>
+                  <p className="text-3xl font-bold mt-1">{estatisticasGerais.atividadesConcluidas}</p>
+                  <p className="text-green-100 text-xs mt-1">de {estatisticasGerais.totalAtividades} totais</p>
                 </div>
                 <div className="text-5xl opacity-20">✓</div>
               </div>
@@ -203,8 +186,8 @@ export default function DashboardIndicadoresPage() {
             <div className="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white rounded-lg shadow-lg p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-yellow-100 text-sm">Metas em Atenção</p>
-                  <p className="text-3xl font-bold mt-1">{estatisticasGerais.metasAtencao}</p>
+                  <p className="text-yellow-100 text-sm">Atividades Atrasadas</p>
+                  <p className="text-3xl font-bold mt-1">{estatisticasGerais.atividadesAtrasadas}</p>
                   <p className="text-yellow-100 text-xs mt-1">requerem atenção</p>
                 </div>
                 <div className="text-5xl opacity-20">⚠️</div>
@@ -216,7 +199,7 @@ export default function DashboardIndicadoresPage() {
                 <div>
                   <p className="text-purple-100 text-sm">Progresso Geral</p>
                   <p className="text-3xl font-bold mt-1">{estatisticasGerais.progressoGeral}%</p>
-                  <p className="text-purple-100 text-xs mt-1">média de todas metas</p>
+                  <p className="text-purple-100 text-xs mt-1">média de todas atividades</p>
                 </div>
                 <div className="text-5xl opacity-20">📊</div>
               </div>
@@ -255,11 +238,11 @@ export default function DashboardIndicadoresPage() {
                         <p className={`text-xs mt-1 ${
                           alerta.severidade === 'alta' ? 'text-red-600' : 'text-yellow-600'
                         }`}>
-                          {alerta.pacto}
+                          {alerta.chamado}
                         </p>
                       </div>
                       <button
-                        onClick={() => router.push('/pactuacao/pactos')}
+                        onClick={() => router.push('/chamados')}
                         className={`ml-4 px-3 py-1 rounded text-sm font-medium whitespace-nowrap ${
                           alerta.severidade === 'alta'
                             ? 'bg-red-600 hover:bg-red-700 text-white'
@@ -295,16 +278,16 @@ export default function DashboardIndicadoresPage() {
 
                   <div className="grid grid-cols-3 gap-4 mb-3">
                     <div>
-                      <p className="text-xs text-gray-500">Pactos Ativos</p>
-                      <p className="text-lg font-semibold text-gray-900">{setor.pactosAtivos}</p>
+                      <p className="text-xs text-gray-500">Chamados Ativos</p>
+                      <p className="text-lg font-semibold text-gray-900">{setor.chamadosAtivos}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Metas Concluídas</p>
-                      <p className="text-lg font-semibold text-gray-900">{setor.metasConcluidas}</p>
+                      <p className="text-xs text-gray-500">Atividades Concluídas</p>
+                      <p className="text-lg font-semibold text-gray-900">{setor.atividadesConcluidas}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Total de Metas</p>
-                      <p className="text-lg font-semibold text-gray-900">{setor.metasTotais}</p>
+                      <p className="text-xs text-gray-500">Total de Atividades</p>
+                      <p className="text-lg font-semibold text-gray-900">{setor.atividadesTotais}</p>
                     </div>
                   </div>
 
@@ -336,8 +319,8 @@ export default function DashboardIndicadoresPage() {
                   <div key={atualizacao.id} className="border-l-4 border-blue-500 bg-blue-50 p-4 rounded-r-lg">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900">{atualizacao.meta}</h3>
-                        <p className="text-sm text-gray-600">{atualizacao.pacto}</p>
+                        <h3 className="font-semibold text-gray-900">{atualizacao.atividade}</h3>
+                        <p className="text-sm text-gray-600">{atualizacao.chamado}</p>
                         <div className="flex items-center gap-2 mt-2">
                           <span className="text-sm text-gray-500">
                             {atualizacao.valorAnterior} {atualizacao.unidade}
@@ -364,22 +347,22 @@ export default function DashboardIndicadoresPage() {
           {/* Ações Rápidas */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <button
-              onClick={() => router.push('/pactuacao/pactos')}
+              onClick={() => router.push('/chamados')}
               className="bg-white hover:bg-gray-50 border-2 border-blue-600 text-blue-600 rounded-lg p-6 text-center font-semibold transition-colors"
             >
-              📋 Ver Todos os Pactos
+              🎫 Ver Todos os Chamados
             </button>
             <button
-              onClick={() => router.push('/pactuacao/metas')}
+              onClick={() => router.push('/chamados/atividades')}
               className="bg-white hover:bg-gray-50 border-2 border-green-600 text-green-600 rounded-lg p-6 text-center font-semibold transition-colors"
             >
-              🎯 Ver Todas as Metas
+              📋 Ver Todas as Atividades
             </button>
             <button
-              onClick={() => router.push('/pactuacao/pactos/novo')}
+              onClick={() => router.push('/chamados/novo')}
               className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg p-6 text-center font-semibold transition-colors"
             >
-              ➕ Criar Novo Pacto
+              ➕ Abrir Novo Chamado
             </button>
           </div>
         </div>

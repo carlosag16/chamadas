@@ -11,8 +11,8 @@ interface Setor {
   email: string;
   telefone: string;
   descricao: string;
-  pactosAtivos: number;
-  metasConcluidas: number;
+  chamadosAtivos: number;
+  atividadesConcluidas: number;
   status: 'Ativo' | 'Inativo';
 }
 
@@ -32,8 +32,8 @@ export default function SetoresPage() {
       email: 'joao.silva@empresa.com',
       telefone: '(11) 98765-4321',
       descricao: 'Diretoria executiva responsável pelas decisões estratégicas',
-      pactosAtivos: 1,
-      metasConcluidas: 0,
+      chamadosAtivos: 1,
+      atividadesConcluidas: 0,
       status: 'Ativo'
     },
     {
@@ -44,8 +44,8 @@ export default function SetoresPage() {
       email: 'carlos.oliveira@empresa.com',
       telefone: '(11) 98765-4322',
       descricao: 'Gestão financeira, orçamentária e contábil',
-      pactosAtivos: 1,
-      metasConcluidas: 0,
+      chamadosAtivos: 1,
+      atividadesConcluidas: 0,
       status: 'Ativo'
     },
     {
@@ -56,8 +56,8 @@ export default function SetoresPage() {
       email: 'roberta.costa@empresa.com',
       telefone: '(11) 98765-4323',
       descricao: 'Gestão de pessoas, recrutamento e desenvolvimento',
-      pactosAtivos: 1,
-      metasConcluidas: 0,
+      chamadosAtivos: 1,
+      atividadesConcluidas: 0,
       status: 'Ativo'
     },
     {
@@ -68,8 +68,8 @@ export default function SetoresPage() {
       email: 'pedro.henrique@empresa.com',
       telefone: '(11) 98765-4324',
       descricao: 'Infraestrutura de TI, sistemas e suporte técnico',
-      pactosAtivos: 1,
-      metasConcluidas: 0,
+      chamadosAtivos: 1,
+      atividadesConcluidas: 0,
       status: 'Ativo'
     },
     {
@@ -80,8 +80,8 @@ export default function SetoresPage() {
       email: 'ana.lima@empresa.com',
       telefone: '(11) 98765-4325',
       descricao: 'Gestão de processos operacionais e produção',
-      pactosAtivos: 1,
-      metasConcluidas: 0,
+      chamadosAtivos: 1,
+      atividadesConcluidas: 0,
       status: 'Ativo'
     },
     {
@@ -92,8 +92,8 @@ export default function SetoresPage() {
       email: 'maria.santos@empresa.com',
       telefone: '(11) 98765-4326',
       descricao: 'Gestão da qualidade, processos e certificações',
-      pactosAtivos: 1,
-      metasConcluidas: 0,
+      chamadosAtivos: 1,
+      atividadesConcluidas: 0,
       status: 'Ativo'
     },
     {
@@ -104,8 +104,8 @@ export default function SetoresPage() {
       email: 'ricardo.almeida@empresa.com',
       telefone: '(11) 98765-4327',
       descricao: 'Vendas, negociação e relacionamento com clientes',
-      pactosAtivos: 0,
-      metasConcluidas: 0,
+      chamadosAtivos: 0,
+      atividadesConcluidas: 0,
       status: 'Ativo'
     },
     {
@@ -116,8 +116,8 @@ export default function SetoresPage() {
       email: 'juliana.martins@empresa.com',
       telefone: '(11) 98765-4328',
       descricao: 'Marketing, comunicação e branding',
-      pactosAtivos: 0,
-      metasConcluidas: 0,
+      chamadosAtivos: 0,
+      atividadesConcluidas: 0,
       status: 'Ativo'
     },
     {
@@ -128,8 +128,8 @@ export default function SetoresPage() {
       email: 'lucia.fernandes@empresa.com',
       telefone: '(11) 98765-4329',
       descricao: 'Serviços administrativos e suporte geral',
-      pactosAtivos: 1,
-      metasConcluidas: 0,
+      chamadosAtivos: 1,
+      atividadesConcluidas: 0,
       status: 'Ativo'
     },
     {
@@ -140,8 +140,8 @@ export default function SetoresPage() {
       email: 'sandra.alves@empresa.com',
       telefone: '(11) 98765-4330',
       descricao: 'Gestão de instalações e infraestrutura predial',
-      pactosAtivos: 0,
-      metasConcluidas: 2,
+      chamadosAtivos: 0,
+      atividadesConcluidas: 2,
       status: 'Ativo'
     }
   ]);
@@ -209,8 +209,8 @@ export default function SetoresPage() {
         email: formData.email!,
         telefone: formData.telefone!,
         descricao: formData.descricao!,
-        pactosAtivos: 0,
-        metasConcluidas: 0,
+        chamadosAtivos: 0,
+        atividadesConcluidas: 0,
         status: formData.status as 'Ativo' | 'Inativo'
       };
       setSetores([...setores, novoSetor]);
@@ -227,8 +227,8 @@ export default function SetoresPage() {
 
   const excluirSetor = (id: number) => {
     const setor = setores.find(s => s.id === id);
-    if (setor && setor.pactosAtivos > 0) {
-      alert('Não é possível excluir um setor com pactos ativos!');
+    if (setor && setor.chamadosAtivos > 0) {
+      alert('Não é possível excluir um setor com chamados ativos!');
       return;
     }
 
@@ -270,36 +270,19 @@ export default function SetoresPage() {
         <div className="px-4 sm:px-0">
           {/* Filtros */}
           <div className="mb-6 flex gap-2">
-            <button
-              onClick={() => setFiltroStatus('Todos')}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                filtroStatus === 'Todos'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
-              }`}
-            >
-              Todos
-            </button>
-            <button
-              onClick={() => setFiltroStatus('Ativo')}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                filtroStatus === 'Ativo'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
-              }`}
-            >
-              Ativos
-            </button>
-            <button
-              onClick={() => setFiltroStatus('Inativo')}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                filtroStatus === 'Inativo'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
-              }`}
-            >
-              Inativos
-            </button>
+            {['Todos', 'Ativo', 'Inativo'].map((status) => (
+              <button
+                key={status}
+                onClick={() => setFiltroStatus(status)}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  filtroStatus === status
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
+                }`}
+              >
+                {status === 'Ativo' ? 'Ativos' : status === 'Inativo' ? 'Inativos' : status}
+              </button>
+            ))}
           </div>
 
           {/* Grid de Setores */}
@@ -340,12 +323,12 @@ export default function SetoresPage() {
 
                 <div className="grid grid-cols-2 gap-3 mb-4 pt-4 border-t border-gray-200">
                   <div className="text-center">
-                    <p className="text-xs text-gray-500">Pactos Ativos</p>
-                    <p className="text-xl font-bold text-blue-600">{setor.pactosAtivos}</p>
+                    <p className="text-xs text-gray-500">Chamados Ativos</p>
+                    <p className="text-xl font-bold text-blue-600">{setor.chamadosAtivos}</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-xs text-gray-500">Metas Concluídas</p>
-                    <p className="text-xl font-bold text-green-600">{setor.metasConcluidas}</p>
+                    <p className="text-xs text-gray-500">Atividades Concluídas</p>
+                    <p className="text-xl font-bold text-green-600">{setor.atividadesConcluidas}</p>
                   </div>
                 </div>
 
@@ -365,8 +348,8 @@ export default function SetoresPage() {
                   <button
                     onClick={() => excluirSetor(setor.id)}
                     className="bg-red-50 text-red-700 px-3 py-2 rounded text-sm font-medium hover:bg-red-100"
-                    disabled={setor.pactosAtivos > 0}
-                    title={setor.pactosAtivos > 0 ? 'Não é possível excluir setor com pactos ativos' : 'Excluir'}
+                    disabled={setor.chamadosAtivos > 0}
+                    title={setor.chamadosAtivos > 0 ? 'Não é possível excluir setor com chamados ativos' : 'Excluir'}
                   >
                     🗑️
                   </button>
